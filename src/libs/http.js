@@ -1,4 +1,4 @@
-const BASE_URL = 'https://badges-api-example-pt.herokuapp.com';
+const BASE_URL = 'https://badges-api-example-pt.herokuapp.com/';
 
 class Http {
     static instance = new Http();
@@ -41,6 +41,10 @@ class Http {
         try {
             let request = await fetch(`${BASE_URL}/_id:${badgeId}/`,{
                 method: 'PUT',
+                headers:{
+                    'Content-Type':'application/json',
+                    Accept: 'application/json',
+                },
                 body: JSON.stringify(body),
             });
             let response = await request.json();
