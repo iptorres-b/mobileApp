@@ -10,6 +10,7 @@ import Colors from '../../res/Colors';
 import Storage from '../../libs/storage';
 import BadgesItem from '../BadgesScreen/BadgesItem';
 import exampleStyles from '../../styles/example';
+import Loader from '../Generics/Loader';
 
 class Favorites extends React.Component {
     state={
@@ -23,12 +24,13 @@ class Favorites extends React.Component {
     };
 
     getFavorites = async () => {
+        this.setState({loading: true, badges: undefined});
         try {
             const allKeys = await Storage.instance.getAllKeys();
             const keys = allKeys.filter(key => key.includes('favorite-'));
             const favs = await Storage.instance.multiGet(keys);
             const favorites = favs.map(fav => JSON.parse(fav[1]));
-            this.setState({badges: favorites});
+            this.setState({loading: false, badges: favorites});
         } catch (err) {
             console.log('get favorites', err);
         }
@@ -52,18 +54,7 @@ class Favorites extends React.Component {
         const {badges, loading} = this.state
 
         if(loading===true && !badges){
-            <View style={[
-                styles.favoritesContainer, 
-                exampleStyles.container, 
-                exampleStyles.horizontal,
-            ]}>
-                <StatusBar backgroundColor="transparent" translucent={true} />
-                <ActivityIndicator 
-                    style={exampleStyles.loader} 
-                    color= "#1106B8" 
-                    size="large" 
-                />
-            </View>
+           <Loader />
         }
         return(
             <View 

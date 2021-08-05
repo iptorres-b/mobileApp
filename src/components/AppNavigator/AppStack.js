@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import BadgesTabNavigator from '../BadgesScreen/BadgesTabNavigator';
-import BadgeLanding from '../BadgesLanding/BadgeLanding';
+import Login from '../UsersScreen/Login'
 import Colors from '../../res/Colors';
 
 const Stack = createStackNavigator();
@@ -18,8 +18,8 @@ const AppStack = () => {
             headerTintColor: Colors.white,
         }}>
         <Stack.Screen 
-            name="Landing"
-            component={BadgeLanding}
+            name="Loading"
+            component={Login}
             options={{headerShown: false }}
         />
         <Stack.Screen name="BadgesTabNavigator" component={BadgesTabNavigator} />
