@@ -36,6 +36,8 @@ import Loader from '../Generics/Loader';
                 console.log(response);
                 if (response['405']){
                     var message = 'Account is not verified';
+                } else {
+                    var message = 'Invalid Username or password. Try again';
                 }
                 this.setState({loading: false, error: message, user: undefined});
             } else {
@@ -78,7 +80,7 @@ import Loader from '../Generics/Loader';
                             {error ? (
                                <View style={styles.errorContainer}>
                                    <Text style={styles.errorMsg}>
-                                       {'Invalid Username or password. Try again'}
+                                       {error}
                                    </Text>
                                </View> 
                             ) : null }
