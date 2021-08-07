@@ -12,6 +12,7 @@ import {
  import Colors from '../../res/Colors';
  import UserSesion from '../../libs/sessions';
  import styles from './styles';
+import Loader from '../Generics/Loader';
 
  const imageBackground = {
      uri: 'https://images.pexels.com/photos/3428278/pexels-photo-3428278.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
@@ -32,7 +33,11 @@ import {
             let response = await UserSesion.instance.login(this.state.form);
         
             if(typeof response === 'object'){
-                this.setState({loading: false, error: response, user: undefined});
+                console.log(response);
+                if (response['405']){
+                    var message = 'Account is not verified';
+                }
+                this.setState({loading: false, error: message, user: undefined});
             } else {
                 this.setState({loading: false, error: null, user: response});
             }
@@ -52,8 +57,17 @@ import {
         }
     };
 
+    handleSignup = () => {
+        this.props.navigation.navigate('Signup');
+    };
+
      render(){
-         const { isPasswordVisible, loading, error} = this.state;
+         const { isPasswordVisible, loading, error, user} = this.state;
+
+         if (loading === true && !user) {
+             return <Loader />
+         }
+
          return(
              <View style={styles.container}>
                  <StatusBar backgroundColor="transparent" translucent={true} />

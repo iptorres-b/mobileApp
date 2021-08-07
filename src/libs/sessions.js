@@ -39,7 +39,7 @@ class UserSesion {
 
     signup = async body => {
         try{
-            await fetch(`${BASE_URL.users_url}/users/signup`, {
+            let request = await fetch(`${BASE_URL.users_url}/users/signup/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,6 +47,12 @@ class UserSesion {
                 },
                 body: JSON.stringify(body),
             });
+            let response = await request.json();
+            if (typeof response.username === 'string') {
+                return response.username;
+         } else {
+                return response;
+            }
         } catch (err) {
             console.log('Sign up Err', err);
             throw Error(err);

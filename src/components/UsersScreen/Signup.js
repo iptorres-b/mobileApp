@@ -16,10 +16,77 @@ import UserSesion from '../../libs/sessions';
 const imageBackground = {
     uri: 'https://images.pexels.com/photos/3428278/pexels-photo-3428278.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
 };
-
 class Signup extends React.Component {
+    state = {
+        loading: false,
+        error: false,
+        errors: undefined,
+        user: undefined,
+        isPasswordVisible: true,
+        isPasswordConfVisible: true,
+        form: {},
+    };
+
+    handleSubmit = async () => {
+        try {
+            this.setState({loading: true, user: undefined});
+            let response = await UserSesion.instance.signup(this.state.form);
+            console.log(response);
+            if (typeof response === 'object') {
+                let errors = [];
+                let cont =0;
+
+                for(let error in response){
+                    let key = error;
+
+                    if (error === 'non_field_errors'){
+                        error = 'password';
+                    }
+                    errors.push(
+                        <View key={cont}>
+                            <Text style={styles.errorMsg}>
+                                {`${error} : ${response[key][0]}`}
+                            </Text>
+                        </View>
+                    ); 
+                    cont++;
+                }
+                this.setState({loading: false, user: undefined, errors: errors});
+            } else {
+                this.setState({
+                    loading: false, 
+                    user: response, 
+                    errors: undefined,
+                });
+                if(this.state.user){
+                    this.props.navigation.navigate('Login');
+                }
+            }
+        } catch (err) {
+            console.log('Sign up err',err);
+            throw Error(err);
+        }
+    };
+
+    ToggleisPasswordVisible = () => {
+        if (this.state.isPasswordVisible) {
+            this.setState({isPasswordVisible : false});
+        } else {
+            this.setState({isPasswordVisible: true});
+        }
+    };
+
+    ToggleisPasswordConfVisible = () => {
+        if (this.state.isPasswordConfVisible) {
+            this.setState({isPasswordConfVisible : false});
+        } else {
+            this.setState({isPasswordConfVisible: true});
+        }
+    };
+
     render() {
-        const {isPasswordVisible, isPasswordConfVisible, loading, errors} = this.state;
+        const {isPasswordVisible, isPasswordConfVisible, loading, errors} = 
+        this.state;
 
         if (loading === true ) {
             return <Loader />
@@ -32,8 +99,10 @@ class Signup extends React.Component {
                     <ImageBackground source={imageBackground} style={styles.image}>
                         <View style={styles.layerColer}>
                             <View style={styles.scrollForm}>
-                                <Text style={[styles.title, {marginTop: 60}]}>Sign up</Text>
-                                {errors}
+                                <Text style={[styles.title, {marginTop: 80}]}>Sign up</Text>
+                                {errors ? (
+                                    <View style={styles.errorContainer}>{errors}</View>
+                                ) : null}
                                 <View style={styles.formgroup}>
                                     <Text style={styles.inputText}>Username: </Text>
                                     <TextInput
@@ -53,6 +122,7 @@ class Signup extends React.Component {
                                         style={styles.input}
                                         placeholder={'email'}
                                         keyboardAppearance="dark"
+                                        keyboardType="email-address"
                                         onChangeText={text => {
                                             this.setState(prevState => {
                                                 let form = Object.assign({}, prevState.form);
@@ -115,7 +185,7 @@ class Signup extends React.Component {
                                     </View>
                                 </View>
                                 <TouchableOpacity
-                                    style={[styles.submit, {marginVertical: 50}]}
+                                    style={[styles.submit, {marginVertical: 60}]}
                                     onPress={this.handleSubmit}>
                                         <Text style={styles.submitText}>Sign up</Text>
                                     </TouchableOpacity>

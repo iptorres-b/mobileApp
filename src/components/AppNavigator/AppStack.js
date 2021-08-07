@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BadgesTabNavigator from '../BadgesScreen/BadgesTabNavigator';
 import Login from '../UsersScreen/Login'
 import Colors from '../../res/Colors';
+import Signup from '../UsersScreen/Signup';
 
 const Stack = createStackNavigator();
 
@@ -18,8 +19,13 @@ const AppStack = () => {
             headerTintColor: Colors.white,
         }}>
         <Stack.Screen 
-            name="Loading"
+            name="Login"
             component={Login}
+            options={{headerShown: false }}
+        />
+        <Stack.Screen 
+            name="Signup"
+            component={Signup}
             options={{headerShown: false }}
         />
         <Stack.Screen name="BadgesTabNavigator" component={BadgesTabNavigator} />

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         borderColor: Colors.white,
     },
     scrollForm: {
-        marginVertical: 80,
+        marginVertical: 120,
         justifyContent: 'center',
         alignItems: 'center',
         width: '90%',
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     errorContainer: {
+        marginVertical: 2,
         paddingHorizontal: 15,
         paddingVertical: 10,
         backgroundColor: '#FF353C40',
