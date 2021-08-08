@@ -7,7 +7,7 @@ import BadgesDetail from '../BadgesDetail/BadgesDetail';
 import BadgesEdit from '../BadgesEdit/BadgesEdit';
 
 const Stack = createStackNavigator();
-
+// this is to navigate through the badges screen, detail and edit
 const BadgesStack = () => {
     return(
         <Stack.Navigator

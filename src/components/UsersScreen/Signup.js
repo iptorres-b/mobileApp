@@ -26,7 +26,7 @@ class Signup extends React.Component {
         isPasswordConfVisible: true,
         form: {},
     };
-
+// the handle submit here is to signup, to create our new user, and their errors while creating it
     handleSubmit = async () => {
         try {
             this.setState({loading: true, user: undefined});
@@ -67,7 +67,7 @@ class Signup extends React.Component {
             throw Error(err);
         }
     };
-
+// then again this is to see or not our password
     ToggleisPasswordVisible = () => {
         if (this.state.isPasswordVisible) {
             this.setState({isPasswordVisible : false});
@@ -75,7 +75,7 @@ class Signup extends React.Component {
             this.setState({isPasswordVisible: true});
         }
     };
-
+// and again with the password confirmation
     ToggleisPasswordConfVisible = () => {
         if (this.state.isPasswordConfVisible) {
             this.setState({isPasswordConfVisible : false});

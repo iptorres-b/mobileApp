@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ActivityIndicator, StatusBar, StyleSheet} from 'react-native';
 import Colors from '../../res/Colors';
-
+//this is the loader we call in the diferent screens in the app
 const Loader = () => {
     return(
         <View style={[styles.container, styles.horizontal]}>

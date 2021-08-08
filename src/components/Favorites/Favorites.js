@@ -22,7 +22,7 @@ class Favorites extends React.Component {
         this.getFavorites();
         this.focusEvent();
     };
-
+// this one is to get the favorites badges in the list
     getFavorites = async () => {
         this.setState({loading: true, badges: undefined});
         try {
@@ -35,17 +35,17 @@ class Favorites extends React.Component {
             console.log('get favorites', err);
         }
     };
-
+// this is for getting the badges detail even when we are on favorites screen
     handlePress = item => {
         this.props.navigation.navigate('FavoritesDetails', {item});
     };
-
+// this is to bring the favorites
     focusEvent = () => {
         this.focusListener = this.props.navigation.addListener('focus', () => {
             this.getFavorites();
         });
     };
-
+//and here we call the method focus listener
     componentWillUnmount = () => {
         this.focusListener();
     };

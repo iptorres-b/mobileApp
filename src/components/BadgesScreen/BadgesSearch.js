@@ -6,7 +6,7 @@ class BadgesSearch extends React.Component {
     state = {
         query: '',
     };
-
+// this function is to handleng the text searched 
     handleText = query =>{
         this.setState({query});
         if (this.props.onChange){

@@ -6,7 +6,7 @@ import Colors from '../../res/Colors';
 import Signup from '../UsersScreen/Signup';
 
 const Stack = createStackNavigator();
-
+//in this file we just put the main screens of our app, and their styles, like login and signup
 const AppStack = () => {
     return(
         <Stack.Navigator

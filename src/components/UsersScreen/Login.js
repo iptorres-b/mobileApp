@@ -27,6 +27,14 @@ import Loader from '../Generics/Loader';
         form: {},
     };
 
+    componentDidMount = () => {
+        this.deleteTokens();
+    };
+//this method is for deleting the tokens, to logout of the app
+    deleteTokens = async () => {
+        await UserSesion.instance.logout();
+    };
+//the handle submit here is to login into the app, handling the different errors
     handleSubmit = async () => {
         try {
             this.setState({loading: true, error: null, user: undefined});
@@ -50,7 +58,7 @@ import Loader from '../Generics/Loader';
             this.props.navigation.replace('BadgesTabNavigator');
         }
     };
-
+// this is to configure if our password is vissible or not
     ToggleisPasswordVisible = () => {
         if(this.state.isPasswordVisible){
             this.setState({isPasswordVisible: false});
@@ -58,7 +66,7 @@ import Loader from '../Generics/Loader';
             this.setState({isPasswordVisible: true});
         }
     };
-
+//this is for whene we click it will send us to sign up screen
     handleSignup = () => {
         this.props.navigation.navigate('Signup');
     };

@@ -1,4 +1,4 @@
-import React from 'reacr';
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import ProfileEdit from './ProfileEdit'
 import Profile from './Profile';

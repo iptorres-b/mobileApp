@@ -8,7 +8,7 @@ import UserStack from '../UsersScreen/UserStack';
 import FavoritesStack from '../Favorites/FavoritesStack';
 
 const Tabs = createBottomTabNavigator();
-
+// this navigator is for the favorites, the home and the profile
 const BadgesTabNavigator = () => {
     return (
         <Tabs.Navigator

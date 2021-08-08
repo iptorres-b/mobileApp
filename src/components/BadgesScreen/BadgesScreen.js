@@ -26,38 +26,38 @@ class BadgesScreen extends React.Component{
         this.focusEvent();
         this.blurEvent();
     }
-
+//
     focusEvent = () => {
         this.focusListener = this.props.navigation.addListener('focus', () => {
             this.setFetchInterval();
         });
     }
-
+//
     blurEvent = () => {
         this.blurListener = this.props.navigation.addListener('blur', () => {
             clearInterval(this.interval);
         })
     }
-
+//
     setFetchInterval = () => {
         this.interval = setInterval(this.fetchdata, 3000);
     };
-
+//
     fetchdata = async () =>{
-        console.log('Fetching data');
+    
         this.setState({loading:true});
         let response = await Http.instance.get_all();
         this.setState({loading: false, badges: response, badgesCopy: response});
     };
-
+    // this is to send to the badges detail screen
     handlePress = item => {
         this.props.navigation.navigate('BadgesDetail', {item}); 
     };
-
+    //this is to send to the screen to edit the badge
     handleEdit = item => {
         this.props.navigation.navigate('BadgesEdit', {item});
     }
-
+    // this is to modify the changes in the badge
     handleChange = (query) => {
         const {badgesCopy} = this.state;
 
@@ -72,8 +72,9 @@ class BadgesScreen extends React.Component{
             this.setFetchInterval();
         }
     };
-
+//this is to delete the whole badge, even if is in favorites
     handleDelete = item => {
+        console.log(item);
         Alert.alert(
             'Are you sure?',
             `Do you really want to delete ${item.name}'s badge?\n\nThis process cannot be undone.`,

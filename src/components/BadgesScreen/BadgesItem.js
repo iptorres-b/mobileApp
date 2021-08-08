@@ -8,7 +8,7 @@ import {
     Pressable,
 } from 'react-native';
 import Colors from '../../res/Colors';
-
+// this file is to show the list of badges that we have
 class BadgesItem extends React.Component{
     render(){
         const {item} = this.props;
